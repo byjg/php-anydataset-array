@@ -1,8 +1,10 @@
 # Array AnyDataset
 
+[![Build Status](https://travis-ci.org/byjg/anydataset-array.svg?branch=master)](https://travis-ci.org/byjg/anydataset-array)
+
 ## Description
 
-Array manipulation abstraction dataset. Anydataset is an agnostic data source abstraction layer in PHP. 
+Array abstraction dataset. Anydataset is an agnostic data source abstraction layer in PHP. 
 
 See more about Anydataset [here](https://github.com/byjg/anydataset).
 
