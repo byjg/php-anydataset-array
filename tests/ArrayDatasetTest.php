@@ -360,5 +360,14 @@ class ArrayDatasetTest extends TestCase
     {
         $this->assertEquals($value, $row->get($field));
     }
+
+    public function testEmptyArray()
+    {
+        $dataset = new ArrayDataset([]);
+
+        $iterator = $dataset->getIterator();
+
+        $this->assertEquals(0, $iterator->count());
+    }
 }
 

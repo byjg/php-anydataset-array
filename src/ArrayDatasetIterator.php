@@ -2,7 +2,6 @@
 
 namespace ByJG\AnyDataset\Lists;
 
-use ByJG\AnyDataset\Core\AnyDataset;
 use ByJG\AnyDataset\Core\GenericIterator;
 use ByJG\AnyDataset\Core\IteratorFilter;
 use ByJG\AnyDataset\Core\Row;

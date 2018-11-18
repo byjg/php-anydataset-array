@@ -23,15 +23,11 @@ class ArrayDataset
     public function __construct($array, $fieldName = "value")
     {
 
-        if (empty($array)) {
-            return;
-        }
-
         if (!is_array($array)) {
             throw new UnexpectedValueException("You need to pass an array");
         }
 
-        $this->array = array();
+        $this->array = [];
 
         foreach ($array as $key => $value) {
             if (is_array($value)) {
