@@ -109,7 +109,11 @@ foreach ($iterator as $row) {
 
 ## Install
 
-Just type: `composer require "byjg/anydataset-array=4.0.*"`
+Just type: 
+
+```bash
+composer require "byjg/anydataset-array=4.0.*"
+```
 
 #### Running Unit tests
 
