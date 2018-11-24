@@ -38,7 +38,7 @@ class ArrayDatasetIterator extends GenericIterator
     protected $filter;
 
     /**
-     * @param Row $rows
+     * @param array $rows
      * @param IteratorFilter $filter
      */
     public function __construct($rows, $filter)
