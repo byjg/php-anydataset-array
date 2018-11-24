@@ -115,9 +115,8 @@ Just type:
 composer require "byjg/anydataset-array=4.0.*"
 ```
 
-#### Running Unit tests
+## Running Unit tests
 
-Running the Unit tests
 
 ```php
 vendor/bin/phpunit
