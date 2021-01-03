@@ -1,16 +1,19 @@
 # AnyDataset-Array
 
-[![Opensource ByJG](https://img.shields.io/badge/opensource-byjg.com-brightgreen.svg)](http://opensource.byjg.com)
-[![Build Status](https://travis-ci.org/byjg/anydataset-array.svg?branch=master)](https://travis-ci.org/byjg/anydataset-array)
+[![Opensource ByJG](https://img.shields.io/badge/opensource-byjg-success.svg)](http://opensource.byjg.com)
+[![GitHub source](https://img.shields.io/badge/Github-source-informational?logo=github)](https://github.com/byjg/anydataset-array/)
+[![GitHub license](https://img.shields.io/github/license/byjg/anydataset-array.svg)](https://opensource.byjg.com/opensource/licensing.html)
+[![GitHub release](https://img.shields.io/github/release/byjg/anydataset-array.svg)](https://github.com/byjg/anydataset-array/releases/)
+[![Build Status](https://travis-ci.com/byjg/anydataset-array.svg?branch=master)](https://travis-ci.com/byjg/anydataset-array)
 
 
 Array abstraction dataset. Anydataset is an agnostic data source abstraction layer in PHP. 
 
-See more about Anydataset [here](https://opensource.byjg.com/anydataset).
+See more about Anydataset [here](https://opensource.byjg.com/php/anydataset).
 
-# Examples
+## Examples
 
-## Simple Manipulation
+### Simple Manipulation
 
 ```php
 <?php
@@ -26,7 +29,7 @@ foreach ($iterator as $row) {
 }
 ```
 
-## Associative Arrays
+### Associative Arrays
 
 ```php
 <?php
@@ -42,7 +45,7 @@ foreach ($iterator as $row) {
 }
 ```
 
-## Array of objects
+### Array of objects
 
 ```php
 <?php
@@ -73,7 +76,7 @@ foreach ($iterator as $row) {
 }
 ```
 
-## Filtering results
+### Filtering results
 
 ```php
 <?php
@@ -106,7 +109,7 @@ foreach ($iterator as $row) {
 }
 ```
 
-# Install
+## Install
 
 Just type: 
 
@@ -114,10 +117,9 @@ Just type:
 composer require "byjg/anydataset-array=4.0.*"
 ```
 
-# Running Unit tests
+## Running Unit tests
 
-
-```php
+```bash
 vendor/bin/phpunit
 ```
 
