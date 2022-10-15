@@ -9,6 +9,7 @@ use ByJG\AnyDataset\Lists\ArrayDataset;
 use PHPUnit\Framework\TestCase;
 use Tests\AnyDataset\Sample\ModelGetter;
 use Tests\AnyDataset\Sample\ModelPublic;
+use UnexpectedValueException;
 
 require_once "Sample/ModelGetter.php";
 require_once "Sample/ModelPublic.php";
@@ -23,23 +24,9 @@ class ArrayDatasetTest extends TestCase
         "B" => array('code' => 1001, 'name' => "ProdB"),
         "C" => array('code' => 1002, 'name' => "ProdC"));
 
-    // Run before each test case
-    public function setUp()
-    {
-        
-    }
-
-    // Run end each test case
-    public function teardown()
-    {
-        
-    }
-
-    /**
-     * @expectedException \UnexpectedValueException
-     */
     public function testInvalidConstructor()
     {
+        $this->expectException(UnexpectedValueException::class);
         new ArrayDataset('aaa');
     }
 
