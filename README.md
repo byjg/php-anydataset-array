@@ -123,5 +123,12 @@ composer require "byjg/anydataset-array=4.0.*"
 vendor/bin/phpunit
 ```
 
+## Dependencies
+
+```mermaid
+flowchart TD
+    byjg/anydataset-array --> byjg/anydataset
+```
+
 ----
 [Open source ByJG](http://opensource.byjg.com)
