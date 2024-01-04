@@ -1,10 +1,10 @@
 # AnyDataset-Array
 
-[![Build Status](https://github.com/byjg/anydataset-array/actions/workflows/phpunit.yml/badge.svg?branch=master)](https://github.com/byjg/anydataset-array/actions/workflows/phpunit.yml)
+[![Build Status](https://github.com/byjg/php-anydataset-array/actions/workflows/phpunit.yml/badge.svg?branch=master)](https://github.com/byjg/php-anydataset-array/actions/workflows/phpunit.yml)
 [![Opensource ByJG](https://img.shields.io/badge/opensource-byjg-success.svg)](http://opensource.byjg.com)
-[![GitHub source](https://img.shields.io/badge/Github-source-informational?logo=github)](https://github.com/byjg/anydataset-array/)
-[![GitHub license](https://img.shields.io/github/license/byjg/anydataset-array.svg)](https://opensource.byjg.com/opensource/licensing.html)
-[![GitHub release](https://img.shields.io/github/release/byjg/anydataset-array.svg)](https://github.com/byjg/anydataset-array/releases/)
+[![GitHub source](https://img.shields.io/badge/Github-source-informational?logo=github)](https://github.com/byjg/php-anydataset-array/)
+[![GitHub license](https://img.shields.io/github/license/byjg/php-anydataset-array.svg)](https://opensource.byjg.com/opensource/licensing.html)
+[![GitHub release](https://img.shields.io/github/release/byjg/php-anydataset-array.svg)](https://github.com/byjg/php-anydataset-array/releases/)
 
 Array abstraction dataset. Anydataset is an agnostic data source abstraction layer in PHP.
 
@@ -113,13 +113,20 @@ foreach ($iterator as $row) {
 Just type:
 
 ```bash
-composer require "byjg/anydataset-array=5.0.*"
+composer require "byjg/anydataset-array"
 ```
 
 ## Running Unit tests
 
 ```bash
 vendor/bin/phpunit
+```
+
+## Dependencies
+
+```mermaid
+flowchart TD
+    byjg/anydataset-array --> byjg/anydataset
 ```
 
 ----
