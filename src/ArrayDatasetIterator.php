@@ -36,12 +36,20 @@ class ArrayDatasetIterator extends GenericIterator
      * @var IteratorFilter
      */
     protected $filter;
+    /**
+     * @var mixed|string
+     */
+    protected $propertyIndexName;
+    /**
+     * @var mixed|string
+     */
+    protected $propertyKeyName;
 
     /**
      * @param array $rows
      * @param IteratorFilter $filter
      */
-    public function __construct($rows, $filter)
+    public function __construct($rows, $filter, $propertyIndexName = "__id", $propertyKeyName = "__key")
     {
         if (!is_array($rows)) {
             throw new InvalidArgumentException("ArrayDatasetIterator must receive an array");
@@ -51,6 +59,10 @@ class ArrayDatasetIterator extends GenericIterator
         $this->rows = $rows;
         $this->keys = array_keys($rows);
         $this->filter = $filter;
+
+        $this->propertyIndexName = $propertyIndexName;
+        $this->propertyKeyName = $propertyKeyName;
+
     }
 
     /**
@@ -81,8 +93,12 @@ class ArrayDatasetIterator extends GenericIterator
         $cols = $this->rows[$key];
 
         $arr = [];
-        $arr["__id"] = $ix;
-        $arr["__key"] = $key;
+        if (!empty($this->propertyIndexName)) {
+            $arr[$this->propertyIndexName] = $ix;
+        }
+        if (!empty($this->propertyKeyName)) {
+            $arr[$this->propertyKeyName] = $key;
+        }
         foreach ($cols as $key => $value) {
             $arr[strtolower($key)] = $value;
         }

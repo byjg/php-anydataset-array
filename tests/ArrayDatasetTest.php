@@ -5,6 +5,7 @@ namespace Tests\AnyDataset\Lists;
 use ByJG\AnyDataset\Core\Enum\Relation;
 use ByJG\AnyDataset\Core\IteratorFilter;
 use ByJG\AnyDataset\Core\IteratorInterface;
+use ByJG\AnyDataset\Core\Row;
 use ByJG\AnyDataset\Lists\ArrayDataset;
 use PHPUnit\Framework\TestCase;
 use Tests\AnyDataset\Sample\ModelGetter;
@@ -23,12 +24,6 @@ class ArrayDatasetTest extends TestCase
     protected $SAMPLE3 = array("A" => array('code' => 1000, 'name' => "ProdA"),
         "B" => array('code' => 1001, 'name' => "ProdB"),
         "C" => array('code' => 1002, 'name' => "ProdC"));
-
-    public function testInvalidConstructor()
-    {
-        $this->expectException(UnexpectedValueException::class);
-        new ArrayDataset('aaa');
-    }
 
     public function testcreateArrayIteratorSample1()
     {
@@ -355,6 +350,29 @@ class ArrayDatasetTest extends TestCase
         $iterator = $dataset->getIterator();
 
         $this->assertEquals(0, $iterator->count());
+    }
+
+    public function testPropertyKeyName()
+    {
+        $dataset = new ArrayDataset($this->SAMPLE1, "value", "id", "name");
+
+        $iterator = $dataset->getIterator();
+
+        $row = $iterator->moveNext();
+        $this->assertField($row, "id", 0);
+        $this->assertField($row, "name", 0);
+        $this->assertField($row, "value", "ProdA");
+
+    }
+
+    public function testPropertyKeyNameEmpty()
+    {
+        $dataset = new ArrayDataset($this->SAMPLE1, "value", null, null);
+
+        $iterator = $dataset->getIterator();
+
+        $row = $iterator->moveNext();
+        $this->assertEquals(["value" => 'ProdA'], $row->toArray());
     }
 }
 

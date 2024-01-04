@@ -13,19 +13,25 @@ class ArrayDataset
      * @var array
      */
     protected $array;
+    /**
+     * @var mixed|string
+     */
+    protected $propertyIndexName;
+    /**
+     * @var mixed|string
+     */
+    protected $propertyKeyName;
 
     /**
      * Constructor Method
      *
      * @param array $array
-     * @param string $fieldName
+     * @param string $property The name of the field if the item is not an array or object
      */
-    public function __construct($array, $fieldName = "value")
+    public function __construct(array $array, string $property = "value", $propertyIndexName = "__id", $propertyKeyName = "__key")
     {
-
-        if (!is_array($array)) {
-            throw new UnexpectedValueException("You need to pass an array");
-        }
+        $this->propertyIndexName = $propertyIndexName;
+        $this->propertyKeyName = $propertyKeyName;
 
         $this->array = [];
 
@@ -33,7 +39,7 @@ class ArrayDataset
             if (is_array($value)) {
                 $this->array[$key] = $value;
             } elseif (!is_object($value)) {
-                $this->array[$key] = array($fieldName => $value);
+                $this->array[$key] = array($property => $value);
             } else {
                 $result = array("__class" => get_class($value));
                 $methods = get_class_methods($value);
@@ -57,6 +63,6 @@ class ArrayDataset
      */
     public function getIterator($filter = null)
     {
-        return new ArrayDatasetIterator($this->array, $filter);
+        return new ArrayDatasetIterator($this->array, $filter, $this->propertyIndexName, $this->propertyKeyName);
     }
 }
