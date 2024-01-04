@@ -6,8 +6,7 @@
 [![GitHub license](https://img.shields.io/github/license/byjg/php-anydataset-array.svg)](https://opensource.byjg.com/opensource/licensing.html)
 [![GitHub release](https://img.shields.io/github/release/byjg/php-anydataset-array.svg)](https://github.com/byjg/php-anydataset-array/releases/)
 
-
-Array abstraction dataset. Anydataset is an agnostic data source abstraction layer in PHP. 
+Array abstraction dataset. Anydataset is an agnostic data source abstraction layer in PHP.
 
 See more about Anydataset [here](https://opensource.byjg.com/php/anydataset).
 
@@ -111,7 +110,7 @@ foreach ($iterator as $row) {
 
 ## Install
 
-Just type: 
+Just type:
 
 ```bash
 composer require "byjg/anydataset-array"
