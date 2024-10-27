@@ -5,7 +5,6 @@ namespace ByJG\AnyDataset\Lists;
 use ByJG\AnyDataset\Core\GenericIterator;
 use ByJG\AnyDataset\Core\IteratorFilter;
 use ByJG\AnyDataset\Core\Row;
-use InvalidArgumentException;
 
 class ArrayDatasetIterator extends GenericIterator
 {
@@ -13,47 +12,46 @@ class ArrayDatasetIterator extends GenericIterator
     /**
      * @var array
      */
-    protected $rows;
+    protected array $rows;
 
     /**
      * Enter description here...
      *
      * @var array
      */
-    protected $keys;
+    protected array $keys;
 
     /**
       /* @var int
      */
-    protected $index;
+    protected int $index;
 
     /**
      * @var Row
      */
-    protected $currentRow;
+    protected ?Row $currentRow;
 
     /**
-     * @var IteratorFilter
+     * @var IteratorFilter|null
      */
-    protected $filter;
+    protected ?IteratorFilter $filter;
     /**
-     * @var mixed|string
+     * @var string|null
      */
-    protected $propertyIndexName;
+    protected ?string $propertyIndexName;
     /**
-     * @var mixed|string
+     * @var string|null
      */
-    protected $propertyKeyName;
+    protected ?string $propertyKeyName;
 
     /**
      * @param array $rows
-     * @param IteratorFilter $filter
+     * @param IteratorFilter|null $filter
+     * @param string|null $propertyIndexName
+     * @param string|null $propertyKeyName
      */
-    public function __construct($rows, $filter, $propertyIndexName = "__id", $propertyKeyName = "__key")
+    public function __construct(array $rows, ?IteratorFilter $filter, ?string $propertyIndexName = "__id", ?string $propertyKeyName = "__key")
     {
-        if (!is_array($rows)) {
-            throw new InvalidArgumentException("ArrayDatasetIterator must receive an array");
-        }
         $this->index = 0;
         $this->currentRow = null;
         $this->rows = $rows;
@@ -62,13 +60,12 @@ class ArrayDatasetIterator extends GenericIterator
 
         $this->propertyIndexName = $propertyIndexName;
         $this->propertyKeyName = $propertyKeyName;
-
     }
 
     /**
      * @return int
      */
-    public function count()
+    public function count(): int
     {
         return count($this->rows);
     }
@@ -77,7 +74,7 @@ class ArrayDatasetIterator extends GenericIterator
      * @return bool
      * @throws \ByJG\Serializer\Exception\InvalidArgumentException
      */
-    public function hasNext()
+    public function hasNext(): bool
     {
         if (!empty($this->currentRow)) {
             return true;
@@ -114,10 +111,10 @@ class ArrayDatasetIterator extends GenericIterator
     }
 
     /**
-     * @return Row
+     * @return Row|null
      * @throws \ByJG\Serializer\Exception\InvalidArgumentException
      */
-    public function moveNext()
+    public function moveNext(): ?Row
     {
         if (!$this->hasNext()) {
             return null;
@@ -129,7 +126,7 @@ class ArrayDatasetIterator extends GenericIterator
         return $row;
     }
 
-    public function key()
+    public function key(): int
     {
         return $this->index;
     }

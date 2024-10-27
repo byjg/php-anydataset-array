@@ -4,7 +4,6 @@ namespace ByJG\AnyDataset\Lists;
 
 use ByJG\AnyDataset\Core\GenericIterator;
 use ByJG\AnyDataset\Core\IteratorFilter;
-use UnexpectedValueException;
 
 class ArrayDataset
 {
@@ -12,15 +11,15 @@ class ArrayDataset
     /**
      * @var array
      */
-    protected $array;
+    protected array $array;
     /**
-     * @var mixed|string
+     * @var string|null
      */
-    protected $propertyIndexName;
+    protected ?string $propertyIndexName;
     /**
-     * @var mixed|string
+     * @var string|null
      */
-    protected $propertyKeyName;
+    protected ?string $propertyKeyName;
 
     /**
      * Constructor Method
@@ -28,7 +27,7 @@ class ArrayDataset
      * @param array $array
      * @param string $property The name of the field if the item is not an array or object
      */
-    public function __construct(array $array, string $property = "value", $propertyIndexName = "__id", $propertyKeyName = "__key")
+    public function __construct(array $array, string $property = "value", ?string $propertyIndexName = "__id", ?string $propertyKeyName = "__key")
     {
         $this->propertyIndexName = $propertyIndexName;
         $this->propertyKeyName = $propertyKeyName;
@@ -44,7 +43,7 @@ class ArrayDataset
                 $result = array("__class" => get_class($value));
                 $methods = get_class_methods($value);
                 foreach ($methods as $method) {
-                    if (strpos($method, "get") === 0) {
+                    if (str_starts_with($method, "get")) {
                         $result[substr($method, 3)] = $value->{$method}();
                     }
                 }
@@ -58,10 +57,10 @@ class ArrayDataset
     /**
      * Return a GenericIterator
      *
-     * @param IteratorFilter $filter
+     * @param IteratorFilter|null $filter
      * @return GenericIterator
      */
-    public function getIterator($filter = null)
+    public function getIterator(IteratorFilter $filter = null): GenericIterator
     {
         return new ArrayDatasetIterator($this->array, $filter, $this->propertyIndexName, $this->propertyKeyName);
     }
