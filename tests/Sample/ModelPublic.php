@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\AnyDataset\Sample;
+namespace Tests\Sample;
 
 use ByJG\Serializer\BaseModel;
 
@@ -20,5 +20,6 @@ class ModelPublic extends BaseModel
     {
         $this->Id = $Id;
         $this->Name = $Name;
+        parent::__construct();
     }
 }

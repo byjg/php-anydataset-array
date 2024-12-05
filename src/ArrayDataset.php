@@ -4,6 +4,7 @@ namespace ByJG\AnyDataset\Lists;
 
 use ByJG\AnyDataset\Core\GenericIterator;
 use ByJG\AnyDataset\Core\IteratorFilter;
+use ByJG\AnyDataset\Core\Row;
 
 class ArrayDataset
 {
@@ -64,4 +65,49 @@ class ArrayDataset
     {
         return new ArrayDatasetIterator($this->array, $filter, $this->propertyIndexName, $this->propertyKeyName);
     }
+
+    /**
+     *
+     * @param string $field
+     * @return void
+     */
+    public function sort(string $field): void
+    {
+        if (count($this->array) == 0) {
+            return;
+        }
+
+        $this->array = $this->quickSortExec($this->array, $field);
+    }
+
+    /**
+     * @param Row[] $seq
+     * @param string $field
+     * @return array
+     */
+    protected function quickSortExec(array $seq, string $field): array
+    {
+        if (!count($seq)) {
+            return $seq;
+        }
+
+        $key = $seq[0];
+        $left = $right = array();
+
+        $cntSeq = count($seq);
+        for ($i = 1; $i < $cntSeq; $i ++) {
+            if (($seq[$i][$field] ?? null) <= ($key[$field] ?? null)) {
+                $left[] = $seq[$i];
+            } else {
+                $right[] = $seq[$i];
+            }
+        }
+
+        return array_merge(
+            $this->quickSortExec($left, $field),
+            [ $key ],
+            $this->quickSortExec($right, $field)
+        );
+    }
+
 }
