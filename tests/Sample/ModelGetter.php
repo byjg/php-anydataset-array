@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\AnyDataset\Sample;
+namespace Tests\Sample;
 
 use ByJG\Serializer\BaseModel;
 
@@ -23,6 +23,7 @@ class ModelGetter extends BaseModel
     {
         $this->_Id = $Id;
         $this->_Name = $Name;
+        parent::__construct();
     }
 
     public function getId()

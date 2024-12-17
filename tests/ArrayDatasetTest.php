@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\AnyDataset\Lists;
+namespace Tests;
 
 use ByJG\AnyDataset\Core\Enum\Relation;
 use ByJG\AnyDataset\Core\IteratorFilter;
@@ -8,12 +8,8 @@ use ByJG\AnyDataset\Core\IteratorInterface;
 use ByJG\AnyDataset\Core\Row;
 use ByJG\AnyDataset\Lists\ArrayDataset;
 use PHPUnit\Framework\TestCase;
-use Tests\AnyDataset\Sample\ModelGetter;
-use Tests\AnyDataset\Sample\ModelPublic;
-use UnexpectedValueException;
-
-require_once "Sample/ModelGetter.php";
-require_once "Sample/ModelPublic.php";
+use Tests\Sample\ModelGetter;
+use Tests\Sample\ModelPublic;
 
 class ArrayDatasetTest extends TestCase
 {
@@ -189,7 +185,7 @@ class ArrayDatasetTest extends TestCase
             $sr = $arrayIterator->moveNext();
             $this->assertField($sr, "__id", 0);
             $this->assertField($sr, "__key", 0);
-            $this->assertField($sr, "__class", "Tests\\AnyDataset\\Sample\\ModelPublic");
+            $this->assertField($sr, "__class", "Tests\\Sample\\ModelPublic");
             $this->assertField($sr, "id", 1);
             $this->assertField($sr, "name", 'ProdA');
             $count++;
@@ -198,7 +194,7 @@ class ArrayDatasetTest extends TestCase
             $sr = $arrayIterator->moveNext();
             $this->assertField($sr, "__id", 1);
             $this->assertField($sr, "__key", 1);
-            $this->assertField($sr, "__class", "Tests\\AnyDataset\\Sample\\ModelPublic");
+            $this->assertField($sr, "__class", "Tests\\Sample\\ModelPublic");
             $this->assertField($sr, "id", 2);
             $this->assertField($sr, "name", 'ProdB');
             $count++;
@@ -207,7 +203,7 @@ class ArrayDatasetTest extends TestCase
             $sr = $arrayIterator->moveNext();
             $this->assertField($sr, "__id", 2);
             $this->assertField($sr, "__key", 2);
-            $this->assertField($sr, "__class", "Tests\\AnyDataset\\Sample\\ModelPublic");
+            $this->assertField($sr, "__class", "Tests\\Sample\\ModelPublic");
             $this->assertField($sr, "id", 3);
             $this->assertField($sr, "name", 'ProdC');
             $count++;
@@ -235,7 +231,7 @@ class ArrayDatasetTest extends TestCase
             $sr = $arrayIterator->moveNext();
             $this->assertField($sr, "__id", 1);
             $this->assertField($sr, "__key", 1);
-            $this->assertField($sr, "__class", "Tests\\AnyDataset\\Sample\\ModelPublic");
+            $this->assertField($sr, "__class", "Tests\\Sample\\ModelPublic");
             $this->assertField($sr, "id", 2);
             $this->assertField($sr, "name", 'ProdB');
             $count++;
@@ -373,6 +369,34 @@ class ArrayDatasetTest extends TestCase
 
         $row = $iterator->moveNext();
         $this->assertEquals(["value" => 'ProdA'], $row->toArray());
+    }
+
+    public function testSort()
+    {
+        $array = [
+            ['name' => 'joao', 'age' => 41],
+            ['name' => 'fernanda', 'age' => 45],
+            ['name' => 'jf', 'age' => 15],
+            ['name' => 'jg jr', 'age' => 4]
+        ];
+
+        $dataset = new ArrayDataset($array);
+
+        $this->assertEquals([
+            ['__id' => 0, '__key' => 0, 'name' => 'joao', 'age' => 41],
+            ['__id' => 1, '__key' => 1, 'name' => 'fernanda', 'age' => 45],
+            ['__id' => 2, '__key' => 2, 'name' => 'jf', 'age' => 15],
+            ['__id' => 3, '__key' => 3, 'name' => 'jg jr', 'age' => 4]
+        ], $dataset->getIterator()->toArray());
+
+        $dataset->sort('age');
+
+        $this->assertEquals([
+            ['__id' => 0, '__key' => 0, 'name' => 'jg jr', 'age' => 4],
+            ['__id' => 1, '__key' => 1, 'name' => 'jf', 'age' => 15],
+            ['__id' => 2, '__key' => 2, 'name' => 'joao', 'age' => 41],
+            ['__id' => 3, '__key' => 3, 'name' => 'fernanda', 'age' => 45],
+        ], $dataset->getIterator()->toArray());
     }
 }
 
